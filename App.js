@@ -10,11 +10,13 @@ import * as ImagePicker from 'expo-image-picker';
 import CircleButton from './components/CircleButton';
 import IconButton from './components/IconButton';
 
+import EmojiPicker from './components/EmojiPicker';
+
 
 const PlaceholderImage = require('./assets/images/background-image.png');
 
 export default function App() {
- 
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const[showAppOptions, setShowAppOptions] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -38,9 +40,13 @@ export default function App() {
   };
   
   const onAddSticker = () => {
-    // add more later
+    setIsModalVisible(true);
   };
   
+  const onModalClose = () => {
+    setIsModalVisible(false);
+  };
+
   const onSaveImageAsync = () => {
     // add more later
   };
@@ -69,6 +75,9 @@ export default function App() {
             <Button label="Use this photo" opPress={() => setShowAppOptions(true)} />
           </View>
         )}
+        <EmojiPicker isVisibl={isModalVisible} onClose={onModalClose}>
+          {/* A list of emoji component will go here */}
+        </EmojiPicker>
         <StatusBar style="auto" />
       </View>  
   );

@@ -84,7 +84,7 @@ export default function App() {
         </EmojiPicker>
         <StatusBar style="auto" />
     </GestureHandlerRootView>  
-  );
+  )
 }
 
 const styles = StyleSheet.create({

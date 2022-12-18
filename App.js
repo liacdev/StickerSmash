@@ -6,6 +6,7 @@ import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
 
 import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 
 import CircleButton from './components/CircleButton';
 import IconButton from './components/IconButton';
@@ -20,6 +21,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const PlaceholderImage = require('./assets/images/background-image.png');
 
 export default function App() {
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+
   const [pickedEmoji, setPickedEmoji] = useState(null);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,6 +35,10 @@ export default function App() {
       allowsEditing: true,
       quality: 1,
     });
+
+    if (status === null) {
+      requestPermission();
+    }
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
